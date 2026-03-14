@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmokeLess Pro - Break Free from Smoking</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons & Libraries -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+        :root {
+            --bg: #05080F;
+            --bg-card: rgba(20, 27, 45, 0.4);
+            --primary: #FF6B35;
+            --primary-glow: rgba(255, 107, 53, 0.3);
+            --secondary: #00D4AA;
+            --text: #F0F2F5;
+            --text-dim: #8892A8;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-display: 'Outfit', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Particles/Glow Effects */
+        .glow-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 80% 20%, var(--primary-glow) 0%, transparent 40%),
+                radial-gradient(circle at 20% 80%, rgba(0, 212, 170, 0.1) 0%, transparent 40%);
+            z-index: -1;
+            filter: blur(80px);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            background: rgba(5, 8, 15, 0.7);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.4rem;
+            font-family: var(--font-display);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary), #FF4757);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn-download-nav {
+            background: var(--primary);
+            color: white;
+            padding: 0.6rem 1.4rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            padding-top: 80px;
+            position: relative;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 650px;
+            z-index: 10;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, #8892A8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.4);
+        }
+
+        .hero-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .phone-mockup {
+            width: 320px;
+            height: auto;
+            position: relative;
+            z-index: 5;
+            filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(2deg); }
+            50% { transform: translateY(-30px) rotate(-2deg); }
+        }
+
+        .glow-behind-phone {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            opacity: 0.2;
+            border-radius: 50%;
+            filter: blur(50px);
+        }
+
+        /* Stats Bar */
+        .stats-container {
+            padding: 4rem 10%;
+            display: flex;
+            justify-content: space-between;
+            background: var(--glass);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+        }
+
+        .stat-label {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* Features */
+        .features {
+            padding: 10rem 10%;
+        }
+
+        .section-tag {
+            text-align: center;
+            color: var(--primary);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 5rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 3rem 2rem;
+            border-radius: 32px;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            background: rgba(20, 27, 45, 0.7);
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--glass);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-dim);
+            font-size: 1rem;
+        }
+
+        /* Health Timeline */
+        .health-section {
+            padding: 10rem 10%;
+            background: rgba(0, 212, 170, 0.02);
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--border);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 4rem;
+            width: 50%;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: 50px;
+            text-align: right;
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-left: 50px;
+            left: 50%;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary);
+            border-radius: 50%;
+            z-index: 10;
+            box-shadow: 0 0 20px var(--secondary);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot { right: -10px; }
+        .timeline-item:nth-child(even) .timeline-dot { left: -10px; }
+
+        .timeline-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 20px;
+        }
+
+        .time-label {
+            color: var(--secondary);
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* Downloads */
+        .downloads {
+            padding: 10rem 10%;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--bg), #0A0E17);
+        }
+
+        .download-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 5rem 2rem;
+            border-radius: 48px;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, var(--primary-glow) 0%, transparent 70%);
+            opacity: 0.5;
+        }
+
+        .store-btns {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .store-btn {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #fff;
+            color: #000;
+            padding: 1rem 2rem;
+            border-radius: 18px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .store-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .store-btn i { font-size: 1.8rem; }
+        .store-btn div span { display: block; font-size: 0.75rem; text-transform: uppercase; font-weight: 600; text-align: left;}
+        .store-btn div strong { font-size: 1.2rem; font-weight: 800; }
+
+        .qr-wrap {
+            margin-top: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .qr-code {
+            width: 160px;
+            height: 160px;
+            background: white;
+            padding: 10px;
+            border-radius: 16px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 5rem 10%;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copyright { color: var(--text-dim); font-size: 0.9rem; }
+        .socials { display: flex; gap: 1.5rem; }
+        .socials a { color: var(--text-dim); transition: 0.3s; }
+        .socials a:hover { color: var(--primary); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            h1 { font-size: 3.5rem; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero { flex-direction: column; text-align: center; }
+            .hero-content { margin-bottom: 5rem; }
+            .hero-desc { margin: 0 auto 2.5rem; }
+            .hero-btns { justify-content: center; }
+            nav .nav-links { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .stats-container { flex-direction: column; gap: 3rem; }
+            .store-btns { flex-direction: column; gap: 1rem; }
+            .timeline::before { left: 20px; }
+            .timeline-item { width: 100%; text-align: left !important; padding-left: 50px !important; }
+            .timeline-dot { left: 10px !important; }
+            footer { flex-direction: column; gap: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-mesh"></div>
+
+    <nav>
+        <div class="logo">
+            <div class="logo-icon"><i data-lucide="shield-check" size="20"></i></div>
+            SmokeLess Pro
+        </div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#health">Health</a>
+            <a href="#download">Download</a>
+        </div>
+        <a href="#download" class="btn-download-nav">Download App</a>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="badge" data-aos="fade-down">
+                <i data-lucide="sparkles" size="14"></i> Over 50k+ Success Stories
+            </div>
+            <h1 data-aos="fade-up" data-aos-delay="100">Take Your Breath Back.</h1>
+            <p class="hero-desc" data-aos="fade-up" data-aos-delay="200">
+                The most advanced AI-powered smoking cessation journey. Personalized to your habits, built for your health.
+            </p>
+            <div class="hero-btns" data-aos="fade-up" data-aos-delay="300">
+                <a href="#download" class="btn-primary">
+                    Start Your Journey <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="hero-visual" data-aos="zoom-in" data-aos-delay="400">
+            <div class="glow-behind-phone"></div>
+            <img src="./assets/mockup.png" alt="SmokeLess App Mockup" class="phone-mockup">
+        </div>
+    </header>
+
+    <section class="stats-container">
+        <div class="stat-item" data-aos="fade-up">
+            <div class="stat-value">$12.4M</div>
+            <div class="stat-label">User Money Saved</div>
+        </div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+            <div class="stat-value">850K</div>
+            <div class="stat-label">Cigarettes Skipped</div>
+        </div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+            <div class="stat-value">12.5%</div>
+            <div class="stat-label">Lung Capacity Impr.</div>
+        </div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="stat-value">50K+</div>
+            <div class="stat-label">Active Quitters</div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="section-tag">Core Capabilities</div>
+        <h2 class="section-title">Everything you need to succeed.</h2>
+        
+        <div class="features-grid">
+            <div class="feature-card" data-aos="fade-up">
+                <div class="feature-icon"><i data-lucide="target"></i></div>
+                <h3>Custom Taper Plans</h3>
+                <p>Choose your pace: Gentle, Standard, or Aggressive. Our algorithm adjusts to your progress daily.</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-icon"><i data-lucide="clock-4"></i></div>
+                <h3>Cooldown Timers</h3>
+                <p>Scientifically proven intervals between cigarettes to reduce cravings and break the habit loop.</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-icon"><i data-lucide="bar-chart-3"></i></div>
+                <h3>Deep Analytics</h3>
+                <p>Track every Euro saved and every breath gained with beautiful interactive charts and heatmaps.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="health" class="health-section">
+        <div class="section-tag">Body Recovery</div>
+        <h2 class="section-title">Your body starts healing instantly.</h2>
+
+        <div class="timeline">
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="time-label">20 MINUTES</span>
+                    <h3>Heart Rate Stabilizes</h3>
+                    <p>Your blood pressure and pulse rate drop to normal levels within minutes of your last cigarette.</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-aos="fade-left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="time-label">12 HOURS</span>
+                    <h3>Carbon Monoxide Drops</h3>
+                    <p>Oxygen levels in your blood increase to normal as carbon monoxide levels decrease.</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="time-label">48 HOURS</span>
+                    <h3>Smell & Taste Improve</h3>
+                    <p>Nerve endings begin to regrow, and your ability to smell and taste is enhanced significantly.</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-aos="fade-left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="time-label">1 MONTH</span>
+                    <h3>Lungs Begin to Repair</h3>
+                    <p>Cilia (tiny hair-like structures) regrow in your lungs, helping to clear mucus and reduce infection risk.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="downloads">
+        <div class="download-box" data-aos="zoom-in">
+            <h2 class="section-title" style="margin-bottom: 1rem;">Ready for a new life?</h2>
+            <p style="color: var(--text-dim); font-size: 1.2rem;">Join thousands of others who chose freedom today.</p>
+            
+            <div class="store-btns">
+                <a href="#" class="store-btn">
+                    <i data-lucide="apple"></i>
+                    <div>
+                        <span>Download on the</span>
+                        <strong>App Store</strong>
+                    </div>
+                </a>
+                <a href="#" class="store-btn">
+                    <i data-lucide="play"></i>
+                    <div>
+                        <span>Get it on</span>
+                        <strong>Google Play</strong>
+                    </div>
+                </a>
+            </div>
+
+            <div class="qr-wrap">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://smokeless.xk" alt="QR Code" class="qr-code">
+                <p style="font-size: 0.9rem; font-weight: 600;">Scan to install instantly</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo">
+            <div class="logo-icon"><i data-lucide="shield-check" size="20"></i></div>
+            SmokeLess Pro
+        </div>
+        <div class="copyright">&copy; 2026 SmokeLess XK. All rights reserved.</div>
+        <div class="socials">
+            <a href="#"><i data-lucide="instagram"></i></a>
+            <a href="#"><i data-lucide="twitter"></i></a>
+            <a href="#"><i data-lucide="facebook"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.init();
+
+        // Initialize Scroll Animations
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.padding = '1rem 5%';
+                nav.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
+            } else {
+                nav.style.padding = '1.5rem 5%';
+                nav.style.boxShadow = 'none';
+            }
+        });
+
+        // GSAP Animations
+        gsap.from(".logo", { duration: 1, opacity: 0, x: -20, ease: "power4.out" });
+        gsap.from(".nav-links a", { duration: 1, opacity: 0, y: -10, stagger: 0.1, ease: "power4.out" });
+        gsap.from(".phone-mockup", { duration: 2, scale: 0.8, opacity: 0, ease: "elastic.out(1, 0.5)" });
+    </script>
+</body>
+</html>
