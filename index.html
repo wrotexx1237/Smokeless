@@ -5,18 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO Meta Tags -->
-    <title>SmokeLess Pro - The Ultimate AI Smoking Cessation App</title>
-    <meta name="description" content="Break free from smoking with SmokeLess Pro. Personalized tail plans, real-time health tracking, and AI-driven motivation to help you quit for good.">
+    <title>SmokeLess Pro - Advanced AI Smoking Cessation Dashboard</title>
+    <meta name="description" content="Stop smoking with the world's most advanced AI-driven tapering app. Real-time health tracking, financial analytics, and behavioral coaching.">
     <meta name="keywords" content="quit smoking app, smoking cessation, health tracker, stop smoking AI, Smokeless Pro, health milestones">
-    <meta name="author" content="SmokeLess Pro Team">
     
-    <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="SmokeLess Pro - Your Journey to a Smoke-Free Life">
-    <meta property="og:description" content="Join 50k+ successful quitters. Track progress, save money, and heal your body today.">
-    <meta property="og:image" content="./assets/mockup.png">
-    <meta property="og:url" content="https://smokelessweb.vercel.app">
-    <meta name="twitter:card" content="summary_large_image">
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,257 +23,291 @@
 
     <style>
         :root {
-            --bg: #05080F;
-            --bg-card: rgba(20, 27, 45, 0.6);
+            --bg: #030509;
+            --bg-accent: #0A0F1A;
             --primary: #FF6B35;
-            --primary-glow: rgba(255, 107, 53, 0.4);
+            --primary-rgb: 255, 107, 53;
             --secondary: #00D4AA;
-            --text: #F0F2F5;
-            --text-dim: #8892A8;
-            --glass: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.1);
+            --secondary-rgb: 0, 212, 170;
+            --text: #F8FAFC;
+            --text-dim: #94A3B8;
+            --border: rgba(255, 255, 255, 0.08);
+            --glass: rgba(15, 23, 42, 0.6);
             --font-main: 'Plus Jakarta Sans', sans-serif;
             --font-display: 'Outfit', sans-serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg); color: var(--text); font-family: var(--font-main); overflow-x: hidden; line-height: 1.6; }
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        body { 
+            background: var(--bg); 
+            color: var(--text); 
+            font-family: var(--font-main); 
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
 
-        .glow-mesh {
+        /* Animated Grain/Noise */
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.03; z-index: 1000; pointer-events: none;
+        }
+
+        .bg-glow {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 80% 20%, var(--primary-glow) 0%, transparent 40%),
-                        radial-gradient(circle at 20% 80%, rgba(0, 212, 170, 0.1) 0%, transparent 40%);
-            z-index: -1; filter: blur(80px);
+            background: 
+                radial-gradient(circle at 10% 10%, rgba(var(--primary-rgb), 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(var(--secondary-rgb), 0.05) 0%, transparent 40%);
+            z-index: -1;
         }
 
+        /* Navbar */
         nav {
-            position: fixed; top: 0; width: 100%; padding: 1.2rem 5%;
+            position: fixed; top: 0; width: 100%; padding: 1rem 8%;
             display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--border); background: rgba(5, 8, 15, 0.8);
+            z-index: 1000; backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            background: rgba(3, 5, 9, 0.8);
         }
 
-        .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.4rem; font-family: var(--font-display); }
-        .logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--primary), #FF4757); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; }
+        .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.4rem; font-family: var(--font-display); }
+        .logo img { height: 36px; width: auto; border-radius: 8px; }
 
-        .nav-links { display: flex; gap: 2.5rem; }
-        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.3s; }
-        .nav-links a:hover { color: var(--primary); }
+        .nav-links { display: flex; gap: 3rem; }
+        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 2px; background: var(--primary); transition: 0.3s; }
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover::after { width: 100%; }
 
-        .hero { min-height: 100vh; display: flex; align-items: center; padding: 0 10%; padding-top: 100px; position: relative; }
-        .hero-content { flex: 1.2; max-width: 700px; z-index: 10; }
-        h1 { font-family: var(--font-display); font-size: 5rem; font-weight: 800; line-height: 1; margin-bottom: 1.5rem; background: linear-gradient(to right, #fff, #8892A8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-desc { font-size: 1.3rem; color: var(--text-dim); margin-bottom: 3rem; }
+        .btn-nav {
+            background: linear-gradient(135deg, var(--primary), #FF4D17);
+            color: white; padding: 0.8rem 2rem; border-radius: 14px;
+            font-weight: 700; text-decoration: none; font-size: 0.9rem;
+            box-shadow: 0 10px 20px rgba(var(--primary-rgb), 0.2);
+            transition: 0.3s;
+        }
 
-        .hero-btns { display: flex; gap: 1.5rem; }
-        .btn-primary { background: var(--primary); color: white; padding: 1.2rem 2.8rem; border-radius: 18px; text-decoration: none; font-weight: 800; font-size: 1.1rem; display: flex; align-items: center; gap: 12px; transition: 0.4s; box-shadow: 0 20px 40px var(--primary-glow); }
-        .btn-primary:hover { transform: translateY(-5px); box-shadow: 0 25px 50px var(--primary-glow); }
+        /* Hero */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 8% 80px; gap: 4rem; }
+        .hero-content { flex: 1; z-index: 10; }
+        .badge {
+            background: rgba(var(--primary-rgb), 0.1); color: var(--primary);
+            padding: 8px 16px; border-radius: 100px; font-size: 0.85rem; font-weight: 800;
+            letter-spacing: 1px; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 1.5rem;
+            border: 1px solid rgba(var(--primary-rgb), 0.2);
+        }
+        h1 { font-family: var(--font-display); font-size: 5.5rem; line-height: 1; font-weight: 800; margin-bottom: 2rem; letter-spacing: -2px; }
+        .text-gradient { background: linear-gradient(to bottom right, #fff, #94A3B8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-desc { font-size: 1.25rem; color: var(--text-dim); margin-bottom: 3.5rem; line-height: 1.6; max-width: 600px; }
 
-        .hero-visual { flex: 0.8; display: flex; justify-content: center; position: relative; }
-        .phone-mockup { width: 100%; max-width: 400px; height: auto; z-index: 5; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8)); animation: float 6s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0) rotate(2deg); } 50% { transform: translateY(-20px) rotate(-1deg); } }
+        .hero-visual { flex: 1; position: relative; perspective: 1000px; }
+        .main-mockup { width: 100%; height: auto; border-radius: 40px; box-shadow: 0 50px 100px rgba(0,0,0,0.5); transform: rotateY(-15deg) rotateX(5deg); transition: 0.5s; }
+        .hero-visual:hover .main-mockup { transform: rotateY(0deg) rotateX(0deg); }
 
-        .stats-grid { padding: 6rem 10%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; background: var(--glass); border-y: 1px solid var(--border); }
-        .stat-item { text-align: center; }
-        .stat-value { font-family: var(--font-display); font-size: 3rem; font-weight: 800; color: var(--text); }
-        .stat-label { color: var(--text-dim); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+        /* Dashboard Highlights */
+        .dashboard-section { padding: 8rem 8%; background: var(--bg-accent); border-radius: 80px; border: 1px solid var(--border); margin: 0 4% 8rem; }
+        .dash-grid { grid-template-columns: 1fr 1fr; display: grid; gap: 6rem; align-items: center; }
+        .dash-img { width: 100%; border-radius: 30px; border: 1px solid var(--border); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
 
-        .section-padding { padding: 10rem 10%; }
-        .centered-head { text-align: center; margin-bottom: 6rem; }
-        .section-tag { color: var(--primary); font-weight: 800; text-transform: uppercase; letter-spacing: 4px; font-size: 0.9rem; margin-bottom: 1rem; display: block; }
-        .section-title { font-family: var(--font-display); font-size: 3.5rem; font-weight: 800; }
+        .stats-list { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+        .stat-card { background: var(--glass); padding: 2rem; border-radius: 30px; border: 1px solid var(--border); }
+        .stat-card i { color: var(--secondary); margin-bottom: 1rem; display: block; }
+        .stat-card h4 { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .stat-card p { color: var(--text-dim); font-size: 0.9rem; }
 
-        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
-        .feature-card { background: var(--bg-card); border: 1px solid var(--border); padding: 4rem 2.5rem; border-radius: 40px; transition: 0.4s; text-align: center; }
-        .feature-card:hover { border-color: var(--primary); transform: translateY(-10px); background: rgba(20, 27, 45, 0.9); }
-        .feature-icon { width: 70px; height: 70px; background: var(--glass); border-radius: 22px; display: flex; align-items: center; justify-content: center; color: var(--primary); margin: 0 auto 2.5rem; }
+        /* Health Roadmap */
+        .health-tracking { padding: 8rem 8%; position: relative; }
+        .timeline { position: relative; max-width: 1000px; margin: 4rem auto; }
+        .timeline::before { content: ''; position: absolute; left: 50%; top: 0; width: 2px; height: 100%; background: var(--border); }
+        .timeline-item { width: 45%; margin-bottom: 4rem; position: relative; }
+        .timeline-item.right { margin-left: auto; text-align: left; }
+        .timeline-item.left { text-align: right; }
+        .tl-dot { width: 20px; height: 20px; background: var(--primary); border-radius: 50%; position: absolute; top: 0; left: calc(100% + 22px); z-index: 5; box-shadow: 0 0 20px var(--primary); }
+        .right .tl-dot { left: -32px; }
+        .tl-card { background: var(--bg-accent); padding: 2.5rem; border-radius: 30px; border: 1px solid var(--border); transition: 0.3s; }
+        .tl-card:hover { border-color: var(--primary); transform: scale(1.05); }
 
-        /* Testimonials */
-        .testimonials { background: rgba(255, 107, 53, 0.02); }
-        .testimonial-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; }
-        .testi-card { background: var(--bg-card); border: 1px solid var(--border); padding: 3rem; border-radius: 30px; }
-        .testi-text { font-style: italic; color: var(--text); font-size: 1.1rem; margin-bottom: 2rem; }
-        .testi-user { display: flex; align-items: center; gap: 15px; }
-        .user-info h4 { font-weight: 700; }
-        .user-info span { color: var(--text-dim); font-size: 0.9rem; }
+        /* Scientific Method */
+        .methods { padding: 8rem 8%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+        .method-box { text-align: center; padding: 4rem 2rem; background: radial-gradient(circle at top, rgba(var(--secondary-rgb), 0.05), transparent); border-radius: 40px; border: 1px solid var(--border); }
+        .method-icon { font-size: 2rem; color: var(--secondary); margin-bottom: 2rem; display: inline-block; }
 
         /* Footer */
-        footer { padding: 8rem 10% 4rem; background: #020408; border-top: 1px solid var(--border); }
+        footer { padding: 8rem 8% 4rem; background: #010204; border-top: 1px solid var(--border); }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 6rem; }
-        .footer-brand p { color: var(--text-dim); margin-top: 1.5rem; max-width: 300px; }
-        .footer-col h5 { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 2rem; }
+        .footer-brand p { color: var(--text-dim); margin-top: 2rem; line-height: 1.7; max-width: 320px; }
+        .footer-col h5 { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 2.5rem; }
         .footer-col ul { list-style: none; }
-        .footer-col li { margin-bottom: 1rem; }
-        .footer-col a { color: var(--text-dim); text-decoration: none; transition: 0.3s; }
+        .footer-col li { margin-bottom: 1.2rem; }
+        .footer-col a { color: var(--text-dim); text-decoration: none; transition: 0.3s; font-weight: 500; }
         .footer-col a:hover { color: var(--primary); }
-        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 4rem; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.9rem; }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 4rem; color: var(--text-dim); }
 
-        @media (max-width: 1200px) { h1 { font-size: 4rem; } }
-        @media (max-width: 1024px) {
-            .hero { flex-direction: column; text-align: center; }
-            .hero-content { margin-bottom: 4rem; }
-            .hero-btns { justify-content: center; }
-            .features-grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
-        }
+        @media (max-width: 1200px) { h1 { font-size: 4rem; } .hero { flex-direction: column; text-align: center; } .hero-desc { margin: 0 auto 3rem; } .dash-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="glow-mesh"></div>
+    <div class="bg-glow"></div>
 
     <nav>
         <div class="logo">
-            <div class="logo-icon"><i data-lucide="shield-check" size="20"></i></div>
+            <img src="./assets/logo.png" alt="SmokeLess Pro Logo">
             SmokeLess Pro
         </div>
         <div class="nav-links">
             <a href="#">Home</a>
-            <a href="#features">Features</a>
-            <a href="#health">Health</a>
-            <a href="#download">Download</a>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#health">Health Tracker</a>
+            <a href="#pricing">Pricing</a>
         </div>
-        <a href="#download" class="btn-download-nav">Get App Free</a>
+        <a href="#download" class="btn-nav">Get Started <i data-lucide="arrow-right" size="16"></i></a>
     </nav>
 
-    <header class="hero">
-        <div class="hero-content">
-            <span class="section-tag" data-aos="fade-down">The #1 Smoking Cessation AI</span>
-            <h1 data-aos="fade-up" data-aos-delay="100">Quit Smoking,<br>Start Living.</h1>
-            <p class="hero-desc" data-aos="fade-up" data-aos-delay="200">
-                Experience the scientifically proven way to quit. Personalized schedules, health milestones, and AI support in one premium app.
-            </p>
-            <div class="hero-btns" data-aos="fade-up" data-aos-delay="300">
-                <a href="#download" class="btn-primary">Download Now <i data-lucide="arrow-right"></i></a>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="badge" data-aos="fade-down"><i data-lucide="star"></i> Apple App of the Day 2026</div>
+                <h1 data-aos="fade-up" data-aos-delay="100" class="text-gradient">Real Health.<br>Real Savings.<br>Zero Smoke.</h1>
+                <p class="hero-desc" data-aos="fade-up" data-aos-delay="200">
+                    The only cessation app that combines deep behavioral AI with a clinical health dashboard. Watch your body heal in real-time while you save thousands of dollars.
+                </p>
+                <div style="display:flex; gap:1.5rem;" data-aos="fade-up" data-aos-delay="300">
+                    <a href="#download" class="btn-nav" style="padding: 1.2rem 3rem;">Download Pro Free</a>
+                    <a href="#video" style="display:flex; align-items:center; gap:10px; color:var(--text); text-decoration:none; font-weight:700;">
+                        <i data-lucide="play-circle" color="var(--primary)"></i> See it in action
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="hero-visual" data-aos="fade-left" data-aos-delay="400">
-            <img src="./assets/mockup.png" alt="SmokeLess Pro App" class="phone-mockup">
-        </div>
-    </header>
+            <div class="hero-visual" data-aos="zoom-in" data-aos-delay="400">
+                <img src="./assets/dashboard_mockup.png" alt="App Dashboard" class="main-mockup">
+            </div>
+        </section>
 
-    <div class="stats-grid">
-        <div class="stat-item" data-aos="zoom-in">
-            <div class="stat-value">50K+</div>
-            <div class="stat-label">Quit Success</div>
-        </div>
-        <div class="stat-item" data-aos="zoom-in" data-aos-delay="100">
-            <div class="stat-value">$12M</div>
-            <div class="stat-label">Saved by Users</div>
-        </div>
-        <div class="stat-item" data-aos="zoom-in" data-aos-delay="200">
-            <div class="stat-value">98%</div>
-            <div class="stat-label">User Satisfaction</div>
-        </div>
-        <div class="stat-item" data-aos="zoom-in" data-aos-delay="300">
-            <div class="stat-value">24/7</div>
-            <div class="stat-label">AI Coaching</div>
-        </div>
-    </div>
+        <section id="dashboard" class="dashboard-section">
+            <div class="dash-grid">
+                <div data-aos="fade-right">
+                    <span class="badge">The Command Center</span>
+                    <h2 class="text-gradient" style="font-size:3.5rem; font-family:var(--font-display); line-height:1.2; margin-bottom:2rem;">Your progress, <br>visualized beautifully.</h2>
+                    <p style="color:var(--text-dim); font-size:1.1rem;">Our dashboard isn't just numbers. It's a physiological map of your recovery. Track every cigarette avoided and every dollar returned to your pocket.</p>
+                    
+                    <div class="stats-list">
+                        <div class="stat-card">
+                            <i data-lucide="heart-pulse"></i>
+                            <h4>Heart Rate</h4>
+                            <p>Stabilizes within 20 mins of quitting.</p>
+                        </div>
+                        <div class="stat-card">
+                            <i data-lucide="coins"></i>
+                            <h4>$4,200/yr</h4>
+                            <p>Average yearly savings for 1-pack users.</p>
+                        </div>
+                    </div>
+                </div>
+                <div data-aos="fade-left">
+                    <img src="./assets/dashboard_mockup.png" class="dash-img" alt="Dashboard Feature">
+                </div>
+            </div>
+        </section>
 
-    <section id="features" class="section-padding">
-        <div class="centered-head">
-            <span class="section-tag">Elite Features</span>
-            <h2 class="section-title">Designed for your success.</h2>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card" data-aos="fade-up">
-                <div class="feature-icon"><i data-lucide="brain"></i></div>
-                <h3>AI Behavioral Insight</h3>
-                <p>Our AI learns your triggers and provides real-time coaching exactly when you need it most.</p>
+        <section id="health" class="health-tracking">
+            <div style="text-align:center;">
+                <span class="badge">Clinical Timeline</span>
+                <h2 class="text-gradient" style="font-size:3.5rem; font-family:var(--font-display);">Your Body is Healing</h2>
             </div>
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="feature-icon"><i data-lucide="zap"></i></div>
-                <h3>Personalized Tapering</h3>
-                <p>Not everyone can quit cold turkey. Choose a plan that matches your pace and body chemistry.</p>
-            </div>
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="feature-icon"><i data-lucide="heart"></i></div>
-                <h3>Health Dashboard</h3>
-                <p>Watch your lungs heal and your heart rate stabilize in real-time with visual indicators.</p>
-            </div>
-        </div>
-    </section>
 
-    <section class="section-padding testimonials">
-        <div class="centered-head">
-            <span class="section-tag">User Stories</span>
-            <h2 class="section-title">From Smokers to Survivors.</h2>
-        </div>
-        <div class="testimonial-grid">
-            <div class="testi-card" data-aos="fade-right">
-                <p class="testi-text">"I tried quitting for 10 years. SmokeLess Pro was the only thing that actually worked by reducing the count gradually."</p>
-                <div class="testi-user">
-                    <div class="user-info">
-                        <h4>Alex Johnson</h4>
-                        <span>Clean for 8 months</span>
+            <div class="timeline">
+                <div class="timeline-item left" data-aos="fade-right">
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <h3 style="color:var(--primary); margin-bottom:0.5rem;">2 Hours</h3>
+                        <p>Nicotine levels in your blood drop significantly. Withdrawal peaks begin.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right" data-aos="fade-left">
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <h3 style="color:var(--secondary); margin-bottom:0.5rem;">48 Hours</h3>
+                        <p>Nerve endings start to regrow. Your sense of smell and taste return to normal.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left" data-aos="fade-right">
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <h3 style="color:#6366F1; margin-bottom:0.5rem;">3 Months</h3>
+                        <p>Lung function increases by 30%. Circulation is vastly improved.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right" data-aos="fade-left">
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <h3 style="color:#F59E0B; margin-bottom:0.5rem;">1 Year</h3>
+                        <p>Risk of coronary heart disease is now half that of a smoker.</p>
                     </div>
                 </div>
             </div>
-            <div class="testi-card" data-aos="fade-left">
-                <p class="testi-text">"The money tracking is mind-blowing. I've saved enough for a luxury vacation just by skipping cigarettes!"</p>
-                <div class="testi-user">
-                    <div class="user-info">
-                        <h4>Sarah Miller</h4>
-                        <span>Clean for 1 year</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="download" class="section-padding" style="text-align: center;">
-        <div class="download-box" data-aos="zoom-out" style="background: var(--bg-card); padding: 6rem; border-radius: 60px; border: 1px solid var(--border); position: relative; overflow: hidden;">
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%); opacity: 0.3;"></div>
-            <h2 class="section-title">Start Your Free Trial Today</h2>
-            <p style="color: var(--text-dim); font-size: 1.2rem; margin: 2rem 0 4rem;">Available now on iOS and Android.</p>
-            <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
-                <a href="#" style="background: white; color: black; padding: 1.2rem 3rem; border-radius: 20px; font-weight: 800; text-decoration: none;">App Store</a>
-                <a href="#" style="background: white; color: black; padding: 1.2rem 3rem; border-radius: 20px; font-weight: 800; text-decoration: none;">Google Play</a>
+        <section class="methods">
+            <div class="method-box" data-aos="fade-up">
+                <i data-lucide="brain" class="method-icon"></i>
+                <h3>Cognitive Behavioral AI</h3>
+                <p>Advanced triggers detection algorithms provide support when you're most vulnerable.</p>
             </div>
-        </div>
-    </section>
+            <div class="method-box" data-aos="fade-up" data-aos-delay="100">
+                <i data-lucide="line-chart" class="method-icon"></i>
+                <h3>Precision Tapering</h3>
+                <p>Clinically-backed reduction schedules that minimize physical withdrawal symptoms.</p>
+            </div>
+            <div class="method-box" data-aos="fade-up" data-aos-delay="200">
+                <i data-lucide="users" class="method-icon"></i>
+                <h3>Peer Support</h3>
+                <p>Join a community of 50,000+ members sharing tips and staying accountable together.</p>
+            </div>
+        </section>
+    </main>
 
     <footer>
         <div class="footer-grid">
             <div class="footer-brand">
                 <div class="logo">
-                    <div class="logo-icon"><i data-lucide="shield-check" size="20"></i></div>
-                    SmokeLess Pro
+                   <img src="./assets/logo.png" alt="Footer Logo"> SmokeLess Pro
                 </div>
-                <p>The global leader in AI-driven smoking cessation technology.</p>
+                <p>The global leader in behavioral AI for nicotine cessation. Helping the world breathe easier, one day at a time.</p>
             </div>
             <div class="footer-col">
-                <h5>Product</h5>
+                <h5>Platform</h5>
                 <ul>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#health">Health Tracking</a></li>
-                    <li><a href="#download">Pricing</a></li>
+                    <li><a href="#">The Dashboard</a></li>
+                    <li><a href="#">Health Analytics</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">App Store</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h5>Company</h5>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Science</a></li>
+                    <li><a href="#">Press Kit</a></li>
+                    <li><a href="#">Support</a></li>
                 </ul>
             </div>
-            <div class="footer-col" id="legal-links">
+            <div class="footer-col">
                 <h5>Legal</h5>
                 <ul>
                     <li><a href="./privacy.html">Privacy Policy</a></li>
                     <li><a href="./cookies.html">Cookie Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                    <li><a href="#">GDPR</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <div>&copy; 2026 SmokeLess Pro. All rights reserved.</div>
-            <div style="display: flex; gap: 2rem;">
-                <a href="#"><i data-lucide="twitter"></i></a>
-                <a href="#"><i data-lucide="instagram"></i></a>
-                <a href="#"><i data-lucide="linkedin"></i></a>
+            <p>&copy; 2026 SmokeLess Pro. Developed with ❤️ for a healthier future.</p>
+            <div style="display:flex; gap:2rem;">
+                <i data-lucide="twitter"></i>
+                <i data-lucide="instagram"></i>
+                <i data-lucide="facebook"></i>
             </div>
         </div>
     </footer>
@@ -290,28 +316,17 @@
         lucide.init();
         AOS.init({ duration: 1000, once: true });
 
-        // Hover effect for feature cards
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--x', `${x}px`);
-                card.style.setProperty('--y', `${y}px`);
-            });
-        });
-
-        // Header scroll
-        window.onscroll = () => {
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
-            if (window.scrollY > 20) {
-                nav.style.background = 'rgba(5, 8, 15, 0.95)';
-                nav.style.padding = '0.8rem 5%';
+            if (window.scrollY > 50) {
+                nav.style.padding = '0.8rem 8%';
+                nav.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
             } else {
-                nav.style.background = 'rgba(5, 8, 15, 0.8)';
-                nav.style.padding = '1.2rem 5%';
+                nav.style.padding = '1rem 8%';
+                nav.style.boxShadow = 'none';
             }
-        };
+        });
     </script>
 </body>
 </html>
