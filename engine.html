@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Engine — SmokeLess Pro Architecture</title>
+    <link rel="stylesheet" href="./assets/css/global.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .stack-section { padding: 180px 5% 100px; display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; }
+        .sticky-col { position: sticky; top: 150px; height: fit-content; }
+        .content-col { padding-top: 50px; }
+        .layer-box { background: var(--bg-accent); border: 1px solid var(--border); padding: 4rem; border-radius: 40px; margin-bottom: 4rem; }
+        h1 { font-size: 6rem; margin-bottom: 3rem; }
+        h2 { font-size: 3rem; margin-bottom: 2rem; color: var(--accent); }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="./index.html" class="logo"><img src="./assets/logo.png" alt="Logo"> SmokeLess<span>.</span></a>
+        <div class="nav-links">
+            <a href="./index.html">Home</a>
+            <a href="./engine.html" class="active">Engine</a>
+            <a href="./medical.html">Clinical</a>
+            <a href="./vision.html">Vision</a>
+        </div>
+    </nav>
+
+    <main class="stack-section">
+        <div class="sticky-col">
+            <h1>THE<br>ENGINE<br>v4.2</h1>
+            <p style="font-size: 1.5rem; color: var(--text-muted);">A deep technical dive into the behavioral AI architecture powering your freedom.</p>
+        </div>
+        <div class="content-col">
+            <div class="layer-box">
+                <h2>Neural Trigger-Mapping</h2>
+                <p>Our v4.2 engine utilizes a proprietary Neural network trained on over 500,000 successful cessation trajectories. Unlike standard tracking apps, SmokeLess Pro doesn't just record usage; it predicts physiological stress markers using a mix of heart-rate variability (HRV) and localized behavioral metadata.</p>
+                <br>
+                <p>When the engine detects a "Craving Spike" marker, it activates one of 400 unique micro-interventions, specifically calibrated to your psychological profile (A/B/C cohorts).</p>
+            </div>
+
+            <div class="layer-box">
+                <h2>CBT Re-Calibration</h2>
+                <p>Cognitive Behavioral Therapy (CBT) is traditionally a slow, human-led process. We've digitized the CBT framework into an asynchronous logic stack. By analyzing your response to specific daily tasks, the engine re-weights your "Sovereignty Score" in real-time.</p>
+                <br>
+                <p>This allows for a tapering protocol that is elastic—if you have a high-stress day, the engine expands the protocol safely, preventing the "relapse cliff" common in cold-turkey attempts.</p>
+            </div>
+
+            <div class="layer-box">
+                <h2>Biological Metadata Synchronization</h2>
+                <p>Your journey is synced with our global health index. This means your private recovery metrics contribute to refining the algorithm for the entire collective, while maintaining total end-to-end encryption on your physical identity markers.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

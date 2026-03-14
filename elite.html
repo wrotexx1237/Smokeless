@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Plans — Premium Membership</title>
+    <link rel="stylesheet" href="./assets/css/global.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .container { padding: 180px 5% 100px; max-width: 1400px; margin: 0 auto; text-align: center; }
+        .pricing-flex { display: flex; gap: 3rem; margin-top: 8rem; align-items: stretch; }
+        .p-box { flex: 1; background: var(--bg-accent); border: 1px solid var(--border); padding: 5rem 3rem; border-radius: 60px; text-align: left; position: relative; }
+        .p-box.featured { background: white; color: black; transform: scale(1.05); z-index: 2; border: none; }
+        .p-box.featured h3, .p-box.featured .price { color: black; }
+        .p-box.featured .feat-list li { color: #333; }
+        .price { font-size: 5rem; font-weight: 900; margin: 2rem 0; color: var(--accent); }
+        .feat-list { list-style: none; margin-top: 3rem; }
+        .feat-list li { margin-bottom: 1.5rem; display: flex; gap: 15px; font-weight: 600; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="./index.html" class="logo"><img src="./assets/logo.png" alt="Logo"> SmokeLess<span>.</span></a>
+        <div class="nav-links">
+            <a href="./index.html">Home</a>
+            <a href="./engine.html">Engine</a>
+            <a href="./medical.html">Clinical</a>
+            <a href="./vision.html">Vision</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>PRESERVE<br>YOUR CAPITAL.</h1>
+        <p style="font-size: 1.5rem; color: var(--text-muted); margin-top: 2rem;">The cost of dependency is not just financial. It's biological capital.</p>
+
+        <div class="pricing-flex">
+            <div class="p-box">
+                <h3>Standard</h3>
+                <div class="price">Free</div>
+                <p>Core behavioral tracking and community access.</p>
+                <ul class="feat-list">
+                    <li><i data-lucide="check"></i> Basic AI Analytics</li>
+                    <li><i data-lucide="check"></i> 7-Day History</li>
+                    <li><i data-lucide="check"></i> Community Hub</li>
+                </ul>
+                <a href="#" class="btn-magnetic" style="margin-top: 3rem; background: var(--bg); color: white;">Begin</a>
+            </div>
+
+            <div class="p-box featured">
+                <h3>Elite Pro</h3>
+                <div class="price">$12<span style="font-size: 1rem;">/mo</span></div>
+                <p>The full behavioral intervention suite.</p>
+                <ul class="feat-list">
+                    <li><i data-lucide="zap"></i> Full Neural Tapering v4.2</li>
+                    <li><i data-lucide="zap"></i> HRV Sync Integration</li>
+                    <li><i data-lucide="zap"></i> Biometric Metadata Dash</li>
+                    <li><i data-lucide="zap"></i> Lifetime Sovereignty Hub</li>
+                </ul>
+                <a href="#" class="btn-magnetic" style="margin-top: 3rem;">Unlock Elite</a>
+            </div>
+
+            <div class="p-box">
+                <h3>Founder</h3>
+                <div class="price">$199</div>
+                <p>Lifetime access for early adopters.</p>
+                <ul class="feat-list">
+                    <li><i data-lucide="star"></i> All Pro Features Forever</li>
+                    <li><i data-lucide="star"></i> Beta Engine Access</li>
+                    <li><i data-lucide="star"></i> Founding Member Pack</li>
+                </ul>
+                <a href="#" class="btn-magnetic" style="margin-top: 3rem; background: var(--bg); color: white;">Secure</a>
+            </div>
+        </div>
+    </div>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

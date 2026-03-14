@@ -1,0 +1,178 @@
+/* 
+   Ultimate Bespoke Agency Design System 
+   SmokeLess Pro - 2026 Edition
+*/
+
+:root {
+    --bg: #05070A;
+    --bg-accent: #0D1117;
+    --accent: #7C3AED;
+    --accent-alt: #10B981;
+    --text: #F8FAFC;
+    --text-muted: #94A3B8;
+    --border: rgba(255, 255, 255, 0.05);
+    --glass: rgba(13, 17, 23, 0.7);
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Organic Grain Effect */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url("https://grainy-gradients.vercel.app/noise.svg");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Typography */
+h1, h2, h3, h4, h5 {
+    font-family: var(--font-heading);
+    line-height: 1.1;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+}
+
+.text-reveal {
+    overflow: hidden;
+    display: inline-block;
+}
+
+/* Common Components */
+nav {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    padding: 2.5rem 5%;
+    display: flex;
+    justify-content: space-between; align-items: center;
+    z-index: 1000;
+    transition: 0.5s var(--ease-out);
+}
+
+nav.scrolled {
+    padding: 1.25rem 5%;
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center; gap: 10px;
+}
+
+.logo img { height: 32px; border-radius: 8px; }
+
+.nav-links { display: flex; gap: 3rem; }
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    transition: 0.3s;
+}
+.nav-links a:hover, .nav-links a.active { color: white; }
+
+.btn-magnetic {
+    position: relative;
+    padding: 1.2rem 2.8rem;
+    background: white;
+    color: black;
+    border-radius: 100px;
+    font-weight: 900;
+    text-decoration: none;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: inline-block;
+    transition: transform 0.1s var(--ease-out), background 0.3s;
+}
+
+.btn-magnetic:hover {
+    background: var(--accent);
+    color: white;
+}
+
+/* Footer Architecture */
+footer {
+    padding: 10rem 5% 5rem;
+    background: #000;
+    border-top: 1px solid var(--border);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 1fr);
+    gap: 5rem;
+}
+
+.footer-col h5 {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    margin-bottom: 2.5rem;
+}
+
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 1.2rem; }
+.footer-col a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.footer-col a:hover {
+    color: white;
+    padding-left: 8px;
+}
+
+.footer-bottom {
+    margin-top: 8rem;
+    padding-top: 4rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+}
