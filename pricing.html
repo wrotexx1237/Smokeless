@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing & Plans - SmokeLess Pro</title>
+    <link rel="icon" type="image/png" href="./assets/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        :root { --bg: #030509; --bg-accent: #0A0F1D; --primary: #FF6B35; --text: #F8FAFC; --text-dim: #94A3B8; --border: rgba(255, 255, 255, 0.08); --font-display: 'Outfit', sans-serif; --font-body: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg); color: var(--text); font-family: var(--font-body); padding-top: 100px; }
+        nav { position: fixed; top: 0; width: 100%; padding: 1.25rem 8%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); background: rgba(3, 5, 9, 0.8); }
+        .logo { display: flex; align-items: center; gap: 14px; font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; text-decoration: none; color: white; }
+        .logo img { height: 38px; border-radius: 10px; }
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+        .container { padding: 5rem 8%; max-width: 1200px; margin: 0 auto; }
+        h1 { font-family: var(--font-display); font-size: 4rem; text-align: center; margin-bottom: 4rem; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+        .p-card { background: var(--bg-accent); padding: 3.5rem; border-radius: 32px; border: 1px solid var(--border); text-align: center; transition: 0.3s; }
+        .p-card.featured { border-color: var(--primary); transform: scale(1.05); background: linear-gradient(135deg, rgba(255,107,53,0.05), transparent); }
+        .p-price { font-size: 3.5rem; font-weight: 800; font-family: var(--font-display); margin: 1.5rem 0; }
+        .p-list { list-style: none; text-align: left; margin: 2rem 0; color: var(--text-dim); }
+        .p-list li { margin-bottom: 1rem; display: flex; gap: 10px; align-items: center; }
+        .btn-p { display: block; background: var(--text); color: var(--bg); padding: 1rem; border-radius: 12px; text-decoration: none; font-weight: 800; transition: 0.3s; }
+        .featured .btn-p { background: var(--primary); color: white; }
+        footer { padding: 8rem 8% 4rem; border-top: 1px solid var(--border); text-align: center; color: var(--text-dim); }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="./index.html" class="logo"><img src="./assets/logo.png"> SmokeLess Pro</a>
+        <div class="nav-links">
+            <a href="./index.html">Home</a>
+            <a href="./features.html">Features</a>
+            <a href="./science.html">Science</a>
+            <a href="./story.html">Our Story</a>
+            <a href="./pricing.html" class="active">Pricing</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 data-aos="fade-up">Invest in Your Life.</h1>
+        <div class="pricing-grid">
+            <div class="p-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Basic</h3>
+                <div class="p-price">Free</div>
+                <ul class="p-list">
+                    <li><i data-lucide="check" size="18"></i> Standard Tracking</li>
+                    <li><i data-lucide="check" size="18"></i> Ad-supported</li>
+                    <li><i data-lucide="check" size="18"></i> Basic Milestones</li>
+                </ul>
+                <a href="#" class="btn-p">Get Started</a>
+            </div>
+            <div class="p-card featured" data-aos="fade-up">
+                <h3>Elite Pro</h3>
+                <div class="p-price">$9.99<span style="font-size:1rem; color:var(--text-dim);">/mo</span></div>
+                <ul class="p-list">
+                    <li><i data-lucide="check" size="18"></i> All AI Behaviors</li>
+                    <li><i data-lucide="check" size="18"></i> Clinical Dashboard</li>
+                    <li><i data-lucide="check" size="18"></i> Premium Community</li>
+                    <li><i data-lucide="check" size="18"></i> No Ads Forever</li>
+                </ul>
+                <a href="#" class="btn-p">Start Free Trial</a>
+            </div>
+            <div class="p-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Lifetime</h3>
+                <div class="p-price">$149</div>
+                <ul class="p-list">
+                    <li><i data-lucide="check" size="18"></i> One-time payment</li>
+                    <li><i data-lucide="check" size="18"></i> All future features</li>
+                    <li><i data-lucide="check" size="18"></i> Desktop access</li>
+                </ul>
+                <a href="#" class="btn-p">Buy Once</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>&copy; 2026 SmokeLess Pro. Best value for your lungs.</footer>
+    <script>lucide.createIcons(); AOS.init();</script>
+</body>
+</html>

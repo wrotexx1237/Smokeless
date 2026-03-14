@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - SmokeLess Pro</title>
+    <link rel="icon" type="image/png" href="./assets/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        :root { --bg: #030509; --bg-accent: #0A0F1D; --primary: #FF6B35; --text: #F8FAFC; --text-dim: #94A3B8; --border: rgba(255, 255, 255, 0.08); --font-display: 'Outfit', sans-serif; --font-body: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg); color: var(--text); font-family: var(--font-body); padding-top: 100px; }
+        nav { position: fixed; top: 0; width: 100%; padding: 1.25rem 8%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); background: rgba(3, 5, 9, 0.8); }
+        .logo { display: flex; align-items: center; gap: 14px; font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; text-decoration: none; color: white; }
+        .logo img { height: 38px; border-radius: 10px; }
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+        .container { padding: 5rem 8%; max-width: 1200px; margin: 0 auto; }
+        h1 { font-family: var(--font-display); font-size: 4rem; text-align: center; margin-bottom: 4rem; }
+        .feature-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 10rem; }
+        .f-img { width: 100%; border-radius: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.4); border: 1px solid var(--border); }
+        .f-list { display: grid; gap: 2rem; }
+        .f-item { background: var(--bg-accent); padding: 2.5rem; border-radius: 24px; border: 1px solid var(--border); }
+        .f-item i { color: var(--primary); margin-bottom: 1rem; }
+        footer { padding: 8rem 8% 4rem; border-top: 1px solid var(--border); text-align: center; color: var(--text-dim); }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="./index.html" class="logo"><img src="./assets/logo.png"> SmokeLess Pro</a>
+        <div class="nav-links">
+            <a href="./index.html">Home</a>
+            <a href="./features.html" class="active">Features</a>
+            <a href="./science.html">Science</a>
+            <a href="./story.html">Our Story</a>
+            <a href="./pricing.html">Pricing</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Unmatched Capabilities.</h1>
+        <div class="feature-hero" data-aos="fade-up">
+            <img src="./assets/dashboard_mockup.png" class="f-img">
+            <div>
+                <h2 style="font-family:var(--font-display); font-size:2.5rem; margin-bottom:2rem;">The Command Center</h2>
+                <p style="color:var(--text-dim); font-size:1.2rem; margin-bottom:2rem;">Our dashboard is more than just a tracker. It's a predictive health engine designed to navigate you through the hardest parts of quitting.</p>
+                <div class="f-list">
+                    <div class="f-item">
+                        <i data-lucide="zap"></i>
+                        <h3>Predictive Triggers</h3>
+                        <p>Our AI identifies your smoking patterns (after coffee, during work, after meals) and sends subtle alerts before the craving hits.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-hero" style="grid-template-columns:1fr 1fr;">
+            <div data-aos="fade-right">
+                <h2 style="font-family:var(--font-display); font-size:2.5rem; margin-bottom:2rem;">Personalized Tapering</h2>
+                <p style="color:var(--text-dim); font-size:1.2rem; margin-bottom:2rem;">Cold turkey doesn't work for everyone. Our tapering algorithm calculates a custom reduction schedule based on your pack history.</p>
+                <div class="f-list">
+                    <div class="f-item">
+                        <i data-lucide="calendar"></i>
+                        <h3>Dynamic Schedule</h3>
+                        <p>If you have a difficult day, the AI adjusts. It's not about being perfect; it's about progress.</p>
+                    </div>
+                </div>
+            </div>
+            <img src="./assets/dashboard_mockup.png" class="f-img" data-aos="fade-left">
+        </div>
+    </div>
+
+    <footer>&copy; 2026 SmokeLess Pro. Elevate your health.</footer>
+    <script>lucide.createIcons(); AOS.init();</script>
+</body>
+</html>
