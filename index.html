@@ -3,209 +3,311 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmokeLess Pro - The Ultimate AI Smoking Cessation App</title>
-    <meta name="description" content="Break free from smoking with SmokeLess Pro. Experience the scientifically-backed, AI-driven tapering plan. Save money, track health, and live longer.">
-    <link rel="icon" type="image/png" href="./assets/logo.png">
+    <title>SmokeLess Pro — Premium Breathing Technology</title>
     
-    <!-- Fonts -->
+    <!-- Sophisticated Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Libraries -->
+    <!-- Core UI Libraries -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <style>
         :root {
-            --bg: #030509;
-            --bg-accent: #0A0F1D;
-            --primary: #FF6B35;
-            --secondary: #00D4AA;
-            --text: #F8FAFC;
-            --text-dim: #94A3B8;
-            --border: rgba(255, 255, 255, 0.08);
-            --glass: rgba(15, 23, 42, 0.7);
+            --bg: #0B0E14;
+            --bg-muted: #151921;
+            --accent: #6366F1;
+            --accent-glow: rgba(99, 102, 241, 0.4);
+            --text-high: #F8FAFC;
+            --text-med: #94A3B8;
+            --text-low: #475569;
+            --border: rgba(255, 255, 255, 0.05);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --glass: rgba(15, 23, 32, 0.8);
             --font-display: 'Outfit', sans-serif;
-            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --font-body: 'Inter', sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
-        body { background: var(--bg); color: var(--text); font-family: var(--font-body); overflow-x: hidden; line-height: 1.5; }
+        body { 
+            background: var(--bg); 
+            color: var(--text-high); 
+            font-family: var(--font-body); 
+            overflow-x: hidden;
+            selection-background-color: var(--accent);
+        }
 
-        /* Shared Components */
+        /* --- UI Components --- */
+        
+        .cursor-glow {
+            position: fixed; width: 600px; height: 600px; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            border-radius: 50%; pointer-events: none; z-index: -1; transform: translate(-50%, -50%); opacity: 0.3; transition: opacity 0.5s;
+        }
+
         nav {
-            position: fixed; top: 0; width: 100%; padding: 1.25rem 8%;
+            position: fixed; top: 0; width: 100%; padding: 2rem 5%;
             display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border); background: rgba(3, 5, 9, 0.8);
+            z-index: 1000; transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
         }
-        .logo { display: flex; align-items: center; gap: 14px; font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; text-decoration: none; color: white; }
-        .logo img { height: 38px; border-radius: 10px; }
+        nav.scrolled { background: var(--glass); backdrop-filter: blur(20px); padding: 1.25rem 5%; border-bottom: 1px solid var(--border); }
 
-        .nav-links { display: flex; gap: 2.5rem; }
-        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.3s; }
-        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: white; font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
+        .logo span { color: var(--accent); }
+        .logo img { height: 32px; border-radius: 8px; }
 
-        .btn-cta { background: var(--primary); color: white; padding: 0.8rem 1.8rem; border-radius: 14px; font-weight: 700; text-decoration: none; transition: 0.3s; box-shadow: 0 10px 20px rgba(255,107,53,0.2); }
-        .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(255,107,53,0.3); }
+        .nav-links { display: flex; gap: 3.5rem; }
+        .nav-links a { color: var(--text-med); text-decoration: none; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; position: relative; }
+        .nav-links a:hover, .nav-links a.active { color: white; }
+        .nav-links a.active::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 100%; height: 2px; background: var(--accent); }
 
-        /* Cookie Banner */
+        .btn-premium {
+            background: var(--text-high); color: var(--bg); padding: 0.9rem 2.2rem; border-radius: 100px;
+            font-weight: 800; text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(255,255,255,0.1); transition: 0.4s;
+        }
+        .btn-premium:hover { transform: scale(1.05); background: var(--accent); color: white; box-shadow: 0 15px 40px var(--accent-glow); }
+
+        /* --- Cookie System --- */
         #cookie-banner {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 600px; background: var(--glass);
-            backdrop-filter: blur(30px); border: 1px solid var(--border);
-            padding: 1.5rem 2rem; border-radius: 24px; z-index: 10000;
-            display: flex; align-items: center; justify-content: space-between;
-            gap: 2rem; opacity: 0; pointer-events: none; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: fixed; bottom: 40px; right: 40px; width: 400px; background: var(--bg-muted); border: 1px solid var(--border);
+            padding: 2.5rem; border-radius: 32px; z-index: 9999; box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            display: none; animation: slideUp 0.8s cubic-bezier(0.19, 1, 0.22, 1);
         }
-        #cookie-banner.show { opacity: 1; pointer-events: all; bottom: 40px; }
-        .cookie-text { font-size: 0.9rem; color: var(--text-dim); }
-        .cookie-btns { display: flex; gap: 1rem; }
-        .btn-cookie-accept { background: var(--primary); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s; }
-        .btn-cookie-settings { background: transparent; color: var(--text); border: 1px solid var(--border); padding: 0.6rem 1.2rem; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        #cookie-modal {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9);
+            width: 90%; max-width: 500px; background: var(--bg-muted); border: 1px solid var(--border);
+            padding: 3rem; border-radius: 40px; z-index: 10001; visibility: hidden; opacity: 0; transition: 0.4s;
+        }
+        #cookie-modal.active { visibility: visible; opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 10000; visibility: hidden; opacity: 0; transition: 0.4s; }
+        .modal-overlay.active { visibility: visible; opacity: 1; }
 
-        /* Hero */
-        .hero { padding: 180px 8% 100px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; min-height: 100vh; }
-        h1 { font-family: var(--font-display); font-size: 6rem; line-height: 0.95; font-weight: 900; letter-spacing: -3px; margin-bottom: 2rem; }
-        .highlight { background: linear-gradient(135deg, #fff, var(--text-dim)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-p { font-size: 1.35rem; color: var(--text-dim); margin-bottom: 3.5rem; max-width: 550px; }
+        .toggle-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #334155; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--accent); }
+        input:checked + .slider:before { transform: translateX(24px); }
 
-        .hero-visual { position: relative; }
-        .hero-img { width: 100%; border-radius: 40px; box-shadow: 0 50px 100px rgba(0,0,0,0.5); }
+        /* --- Hero Section --- */
+        .hero { min-height: 100vh; padding: 200px 5% 100px; position: relative; overflow: hidden; }
+        .hero-title { font-family: var(--font-display); font-size: 8vw; line-height: 0.9; font-weight: 900; letter-spacing: -0.05em; margin-bottom: 4rem; }
+        .hero-flex { display: flex; align-items: flex-end; justify-content: space-between; gap: 4rem; }
+        .hero-desc { max-width: 450px; font-size: 1.1rem; color: var(--text-med); line-height: 1.6; margin-bottom: 3rem; }
+        
+        .scroll-indicator {
+            position: absolute; bottom: 50px; left: 5%; display: flex; align-items: center; gap: 15px; color: var(--text-low);
+            font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 3px;
+        }
+        .line { width: 60px; height: 1px; background: var(--text-low); }
 
-        /* Sections */
-        .section-header { text-align: center; margin-bottom: 6rem; padding-top: 5rem; }
-        .section-header h2 { font-family: var(--font-display); font-size: 4rem; font-weight: 800; letter-spacing: -2px; }
+        /* --- Bento Agency Grid --- */
+        .bento-section { padding: 10rem 5%; }
+        .grid-header { margin-bottom: 8rem; display: flex; justify-content: space-between; align-items: flex-end; }
+        .grid-header h2 { font-family: var(--font-display); font-size: 4.5rem; line-height: 1; font-weight: 800; max-width: 600px; }
 
-        /* Bento Grid Dashboard */
-        .dash-grid { padding: 0 8% 10rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-        .dash-card { background: var(--bg-accent); border: 1px solid var(--border); padding: 2.5rem; border-radius: 32px; position: relative; overflow: hidden; }
-        .dash-card.span-2 { grid-column: span 2; }
-        .dash-card i { color: var(--primary); margin-bottom: 1.5rem; }
-        .dash-card h3 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 1rem; }
-        .dash-card p { color: var(--text-dim); }
+        .agency-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
+        .card { background: var(--bg-muted); border: 1px solid var(--border); border-radius: 40px; overflow: hidden; transition: 0.5s; position: relative; cursor: pointer; }
+        .card:hover { border-color: var(--accent); transform: translateY(-10px); }
+        
+        .card-1 { grid-column: span 8; height: 600px; padding: 4rem; display: flex; flex-direction: column; justify-content: space-between; }
+        .card-2 { grid-column: span 4; height: 600px; padding: 4rem; display: flex; flex-direction: column; gap: 2rem; background: var(--accent); color: white; }
+        .card-3 { grid-column: span 4; height: 450px; padding: 3rem; }
+        .card-4 { grid-column: span 4; height: 450px; padding: 3rem; }
+        .card-5 { grid-column: span 4; height: 450px; padding: 3rem; }
 
-        /* Footer */
-        footer { padding: 10rem 8% 4rem; background: #000; border-top: 1px solid var(--border); }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; }
-        .footer-brand p { color: var(--text-dim); margin-top: 2rem; line-height: 1.8; }
-        .footer-col h5 { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 2.5rem; }
-        .footer-col ul { list-style: none; }
-        .footer-col li { margin-bottom: 1rem; }
-        .footer-col a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
-        .footer-col a:hover { color: var(--primary); }
+        .card h3 { font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; margin-bottom: 1rem; }
+        .card p { color: var(--text-med); font-size: 1rem; line-height: 1.6; }
+        .card-2 p { color: rgba(255,255,255,0.8); }
+        
+        .mockup-container { position: absolute; bottom: -50px; right: -50px; width: 70%; opacity: 0.4; pointer-events: none; transition: 0.5s; }
+        .card:hover .mockup-container { opacity: 0.8; bottom: 0; right: 0; }
+
+        /* --- Footer --- */
+        footer { padding: 8rem 5% 4rem; border-top: 1px solid var(--border); background: #080A0E; }
+        .footer-main { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 6rem; }
+        .footer-brand h4 { font-family: var(--font-display); font-size: 2rem; margin-bottom: 2rem; }
+        .footer-col h5 { font-size: 0.75rem; text-transform: uppercase; color: var(--text-low); letter-spacing: 3px; margin-bottom: 2.5rem; }
+        .footer-col a { display: block; color: var(--text-med); text-decoration: none; margin-bottom: 1.2rem; font-size: 0.95rem; transition: 0.3s; }
+        .footer-col a:hover { color: var(--accent); padding-left: 8px; }
+        .footer-bottom { display: flex; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 4rem; color: var(--text-low); font-size: 0.8rem; }
 
         @media (max-width: 1024px) {
-            .hero { grid-template-columns: 1fr; text-align: center; }
-            .dash-grid { grid-template-columns: 1fr; }
-            .dash-card.span-2 { grid-column: span 1; }
+            .hero-title { font-size: 15vw; }
+            .hero-flex { flex-direction: column; align-items: flex-start; }
+            .agency-grid { grid-template-columns: 1fr; }
+            .card { grid-column: span 1 !important; height: auto !important; padding: 3rem; }
+            nav { padding: 1.5rem 5%; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
-    <nav>
+    <div class="cursor-glow"></div>
+    <div class="modal-overlay" id="overlay"></div>
+
+    <nav id="navbar">
         <a href="./index.html" class="logo">
-            <img src="./assets/logo.png" alt="SmokeLess Pro Logo">
-            SmokeLess Pro
+             <img src="./assets/logo.png" alt="Logo"> SmokeLess<span>.</span>
         </a>
         <div class="nav-links">
             <a href="./index.html" class="active">Home</a>
-            <a href="./features.html">Features</a>
-            <a href="./science.html">Science</a>
-            <a href="./story.html">Our Story</a>
-            <a href="./pricing.html">Pricing</a>
+            <a href="./features.html">Dashboard</a>
+            <a href="./science.html">Clinical</a>
+            <a href="./story.html">Story</a>
+            <a href="./pricing.html">Plans</a>
         </div>
-        <a href="#download" class="btn-cta">Download</a>
+        <a href="#download" class="btn-premium">Get App</a>
     </nav>
 
+    <!-- Cookie System -->
     <div id="cookie-banner">
-        <div class="cookie-text">
-            We use cookies to enhance your experience and analyze our traffic. By clicking "Accept All", you consent to our use of cookies. <a href="./cookies.html" style="color:var(--primary);">Learn more</a>
-        </div>
-        <div class="cookie-btns">
-            <button class="btn-cookie-settings" onclick="closeBanner()">Settings</button>
-            <button class="btn-cookie-accept" onclick="acceptCookies()">Accept All</button>
+        <h4 style="margin-bottom: 1rem;">Experience Privacy</h4>
+        <p style="color: var(--text-med); font-size: 0.9rem; margin-bottom: 2rem;">We use cookies to refine your journey. Your data remains yours.</p>
+        <div style="display: flex; gap: 1rem;">
+            <button onclick="acceptAll()" class="btn-premium" style="flex: 1; padding: 0.8rem;">Accept All</button>
+            <button onclick="openSettings()" class="btn-premium" style="flex: 1; padding: 0.8rem; background: transparent; border: 1px solid var(--border); color: white;">Settings</button>
         </div>
     </div>
 
-    <header class="hero">
-        <div class="hero-content">
-            <div class="badge" data-aos="fade-down"><i data-lucide="shield-check" size="16"></i> Verified by Clinical AI</div>
-            <h1 data-aos="fade-up" data-aos-delay="100" class="highlight">A New Era<br>Of Breathing.</h1>
-            <p class="hero-p" data-aos="fade-up" data-aos-delay="200">The most advanced smoking cessation dashboard ever built. Powered by deep behavioral AI to help you quit on your own terms.</p>
-            <div style="display:flex; gap:1.5rem;" data-aos="fade-up" data-aos-delay="300">
-                <a href="#download" class="btn-cta">Start Free Trial</a>
-                <a href="./story.html" style="display:flex; align-items:center; gap:8px; color:white; text-decoration:none; font-weight:700;">Read Our Story <i data-lucide="chevron-right"></i></a>
+    <div id="cookie-modal">
+        <h2 style="font-family: var(--font-display); margin-bottom: 1rem;">Cookie Settings</h2>
+        <p style="color: var(--text-med); margin-bottom: 3rem;">Configure how we handle your information.</p>
+        
+        <div class="toggle-row">
+            <div>
+                <h4 style="font-size: 1rem;">Essential</h4>
+                <p style="font-size: 0.8rem; color: var(--text-low);">Core functionality and security.</p>
             </div>
+            <label class="switch">
+                <input type="checkbox" checked disabled>
+                <span class="slider"></span>
+            </label>
         </div>
-        <div class="hero-visual" data-aos="zoom-in" data-aos-delay="400">
-            <img src="./assets/dashboard_mockup.png" alt="Hero Mockup" class="hero-img">
-        </div>
-    </header>
 
-    <section id="dashboard" class="section-header">
-        <h2>Global Command Center</h2>
-        <p>Everything you need to succeed, mapped across your journey.</p>
-    </section>
+        <div class="toggle-row">
+            <div>
+                <h4 style="font-size: 1rem;">Analytics</h4>
+                <p style="font-size: 0.8rem; color: var(--text-low);">Helping us improve the engine.</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="analytics-toggle">
+                <span class="slider"></span>
+            </label>
+        </div>
 
-    <div class="dash-grid">
-        <div class="dash-card span-2" data-aos="fade-up">
-            <i data-lucide="activity" size="32"></i>
-            <h3>Real-time Metabolism</h3>
-            <p>Our AI analyzes your body's response to nicotine reduction and adjusts your schedule in real-time to minimize withdrawal symptoms.</p>
+        <div class="toggle-row">
+            <div>
+                <h4 style="font-size: 1rem;">Personalization</h4>
+                <p style="font-size: 0.8rem; color: var(--text-low);">Custom UI and tailored feedback.</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="personal-toggle">
+                <span class="slider"></span>
+            </label>
         </div>
-        <div class="dash-card" data-aos="fade-up" data-aos-delay="100">
-            <i data-lucide="piggy-bank" size="32"></i>
-            <h3>Financial Analytics</h3>
-            <p>See exactly how much you've saved and what you can afford next with your "Smoke-Free" fund.</p>
-        </div>
-        <div class="dash-card" data-aos="fade-up" data-aos-delay="200">
-            <i data-lucide="heart" size="32"></i>
-            <h3>Health Repair</h3>
-            <p>Track lung capacity, oxygen levels, and cardiac stability as they return to pre-smoking baselines.</p>
-        </div>
-        <div class="dash-card span-2" data-aos="fade-up" data-aos-delay="300">
-            <i data-lucide="brain" size="32"></i>
-            <h3>Trigger AI</h3>
-            <p>Get predictive alerts before your regular smoking times. Our behavioral engine learns your routine to intervene precisely when needed.</p>
-        </div>
+
+        <button onclick="saveSettings()" class="btn-premium" style="width: 100%; margin-top: 2rem;">Save Preferences</button>
     </div>
+
+    <main>
+        <section class="hero">
+            <h1 class="hero-title" data-aos="fade-up">REWRITE<br>YOUR<br><span style="color: var(--accent);">BREATH.</span></h1>
+            <div class="hero-flex">
+                <div data-aos="fade-right" data-aos-delay="200">
+                    <p class="hero-desc">SmokeLess Pro is not an app. It's an intervention. A high-performance behavioral engine designed for those who demand ultimate freedom from nicotine.</p>
+                    <a href="#download" class="btn-premium">Begin Transformation</a>
+                </div>
+                <div style="text-align: right;" data-aos="fade-left" data-aos-delay="400">
+                    <div style="font-size: 3rem; font-weight: 800; font-family: var(--font-display);">$12.4M</div>
+                    <p style="color: var(--text-low); text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem;">Saved by our global collective</p>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="line"></div> Scroll to Explore
+            </div>
+        </section>
+
+        <section class="bento-section">
+            <div class="grid-header">
+                <h2 data-aos="fade-up">A MASTERCLASS IN BEHAVIORAL DESIGN.</h2>
+                <div style="color: var(--text-low); font-weight: 700;">[ 2026 EDITION ]</div>
+            </div>
+
+            <div class="agency-grid">
+                <div class="card card-1" data-aos="fade-up">
+                    <div>
+                        <h3>Behavioral AI Dashboard</h3>
+                        <p style="max-width: 400px;">Every metric refined. Every craving analyzed. Our dashboard provides a surgical view of your physiological recovery in real-time.</p>
+                    </div>
+                    <img src="./assets/dashboard_mockup.png" class="mockup-container" alt="Mockup">
+                </div>
+                <div class="card card-2" data-aos="fade-up" data-aos-delay="100">
+                    <i data-lucide="zap" size="48"></i>
+                    <div>
+                        <h3>Neural Tapering</h3>
+                        <p>Our v4.2 algorithm predicts withdrawal spikes before they hit your system, offering localized interventions.</p>
+                    </div>
+                </div>
+                <div class="card card-3" data-aos="fade-up">
+                    <i data-lucide="shield" style="color: var(--accent); margin-bottom: 2rem;"></i>
+                    <h3>Clinical Data</h3>
+                    <p>Built with leading neurologists to ensure your brain chemistry rebalances naturally.</p>
+                </div>
+                <div class="card card-4" data-aos="fade-up" data-aos-delay="100">
+                    <i data-lucide="globe" style="color: var(--accent); margin-bottom: 2rem;"></i>
+                    <h3>Global Success</h3>
+                    <p>Join a network of 50,000+ elite members who have successfully transitioned to zero-smoke life.</p>
+                </div>
+                <div class="card card-5" data-aos="fade-up" data-aos-delay="200">
+                    <i data-lucide="codepen" style="color: var(--accent); margin-bottom: 2rem;"></i>
+                    <h3>Infinite Support</h3>
+                    <p>24/7 AI-driven behavioral coaching. It's like having a master psychologist in your pocket.</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <div class="footer-grid">
+        <div class="footer-main">
             <div class="footer-brand">
-                <a href="#" class="logo">
-                    <img src="./assets/logo.png" alt="Logo"> SmokeLess Pro
-                </a>
-                <p>Redefining how the world quits smoking through advanced AI and clinical science.</p>
+                <h4>SmokeLess<span>.</span></h4>
+                <p style="color: var(--text-med); max-width: 300px; line-height: 1.6;">The ultimate standard in digital nicotine cessation. Engineering a smoke-free future for the modern world.</p>
             </div>
             <div class="footer-col">
-                <h5>Platform</h5>
-                <ul>
-                    <li><a href="./features.html">Dashboard</a></li>
-                    <li><a href="./science.html">Health Engine</a></li>
-                    <li><a href="./pricing.html">Pricing Plans</a></li>
-                </ul>
+                <h5>Architecture</h5>
+                <a href="./features.html">The Engine</a>
+                <a href="./science.html">Medical Data</a>
+                <a href="./pricing.html">Elite Plans</a>
             </div>
             <div class="footer-col">
-                <h5>Company</h5>
-                <ul>
-                    <li><a href="./story.html">Our Story</a></li>
-                    <li><a href="./science.html">Medical Board</a></li>
-                    <li><a href="#">Support</a></li>
-                </ul>
+                <h5>Identity</h5>
+                <a href="./story.html">Our Vision</a>
+                <a href="#">Security</a>
+                <a href="#">Support</a>
             </div>
             <div class="footer-col">
                 <h5>Legal</h5>
-                <ul>
-                    <li><a href="./privacy.html">Privacy Policy</a></li>
-                    <li><a href="./cookies.html">Cookie Policy</a></li>
-                    <li><a href="#">Terms of Use</a></li>
-                </ul>
+                <a href="./privacy.html">Privacy Policy</a>
+                <a href="./cookies.html">Cookie Policy</a>
+                <a href="#">Terms of Use</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SmokeLess Pro. Handcrafted for excellence.</p>
+            <div style="display: flex; gap: 2rem;">
+                <i data-lucide="twitter" size="18"></i>
+                <i data-lucide="instagram" size="18"></i>
+                <i data-lucide="linkedin" size="18"></i>
             </div>
         </div>
     </footer>
@@ -214,20 +316,62 @@
         lucide.createIcons();
         AOS.init({ duration: 1000, once: true });
 
-        // Cookie Banner Logic
-        function showBanner() {
-            if (!localStorage.getItem('cookies-accepted')) {
-                document.getElementById('cookie-banner').classList.add('show');
+        // Navbar Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 100) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        // Mouse Glow
+        const glow = document.querySelector('.cursor-glow');
+        window.addEventListener('mousemove', (e) => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
+
+        // Cookie Logic
+        const banner = document.getElementById('cookie-banner');
+        const modal = document.getElementById('cookie-modal');
+        const overlay = document.getElementById('overlay');
+
+        function checkCookies() {
+            if (!localStorage.getItem('agency-cookies')) {
+                banner.style.display = 'block';
             }
         }
-        function acceptCookies() {
-            localStorage.setItem('cookies-accepted', 'true');
-            closeBanner();
+        function acceptAll() {
+            localStorage.setItem('agency-cookies', 'all');
+            banner.style.display = 'none';
         }
-        function closeBanner() {
-            document.getElementById('cookie-banner').classList.remove('show');
+        function openSettings() {
+            modal.classList.add('active');
+            overlay.classList.add('active');
+            banner.style.display = 'none';
         }
-        setTimeout(showBanner, 2000);
+        function saveSettings() {
+            localStorage.setItem('agency-cookies', 'custom');
+            modal.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+        overlay.addEventListener('click', () => {
+            modal.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        setTimeout(checkCookies, 1500);
+
+        // GSAP Animations
+        gsap.to(".hero-title", {
+            scrollTrigger: {
+                trigger: ".hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1
+            },
+            y: -100,
+            opacity: 0.2
+        });
     </script>
 </body>
 </html>

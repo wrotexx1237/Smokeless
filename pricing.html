@@ -3,84 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing & Plans - SmokeLess Pro</title>
+    <title>Elite Plans — SmokeLess Pro</title>
     <link rel="icon" type="image/png" href="./assets/logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <style>
-        :root { --bg: #030509; --bg-accent: #0A0F1D; --primary: #FF6B35; --text: #F8FAFC; --text-dim: #94A3B8; --border: rgba(255, 255, 255, 0.08); --font-display: 'Outfit', sans-serif; --font-body: 'Plus Jakarta Sans', sans-serif; }
-        body { background: var(--bg); color: var(--text); font-family: var(--font-body); padding-top: 100px; }
-        nav { position: fixed; top: 0; width: 100%; padding: 1.25rem 8%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); background: rgba(3, 5, 9, 0.8); }
-        .logo { display: flex; align-items: center; gap: 14px; font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; text-decoration: none; color: white; }
-        .logo img { height: 38px; border-radius: 10px; }
-        .nav-links { display: flex; gap: 2.5rem; }
-        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.3s; }
-        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
-        .container { padding: 5rem 8%; max-width: 1200px; margin: 0 auto; }
-        h1 { font-family: var(--font-display); font-size: 4rem; text-align: center; margin-bottom: 4rem; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
-        .p-card { background: var(--bg-accent); padding: 3.5rem; border-radius: 32px; border: 1px solid var(--border); text-align: center; transition: 0.3s; }
-        .p-card.featured { border-color: var(--primary); transform: scale(1.05); background: linear-gradient(135deg, rgba(255,107,53,0.05), transparent); }
-        .p-price { font-size: 3.5rem; font-weight: 800; font-family: var(--font-display); margin: 1.5rem 0; }
-        .p-list { list-style: none; text-align: left; margin: 2rem 0; color: var(--text-dim); }
-        .p-list li { margin-bottom: 1rem; display: flex; gap: 10px; align-items: center; }
-        .btn-p { display: block; background: var(--text); color: var(--bg); padding: 1rem; border-radius: 12px; text-decoration: none; font-weight: 800; transition: 0.3s; }
-        .featured .btn-p { background: var(--primary); color: white; }
-        footer { padding: 8rem 8% 4rem; border-top: 1px solid var(--border); text-align: center; color: var(--text-dim); }
+        :root { --bg: #0B0E14; --accent: #6366F1; --text-high: #F8FAFC; --text-med: #94A3B8; --border: rgba(255, 255, 255, 0.05); --font-display: 'Outfit', sans-serif; }
+        body { background: var(--bg); color: var(--text-high); font-family: 'Inter', sans-serif; }
+        nav { position: fixed; top: 0; width: 100%; padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(11, 14, 20, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: white; font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 3.5rem; }
+        .nav-links a { color: var(--text-med); text-decoration: none; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+        .container { padding: 180px 5% 100px; max-width: 1200px; margin: 0 auto; }
+        h1 { font-family: var(--font-display); font-size: 5rem; font-weight: 900; line-height: 1; text-align: center; margin-bottom: 6rem; }
+        .p-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .p-card { background: #151921; padding: 4rem 3rem; border-radius: 40px; border: 1px solid var(--border); text-align: center; transition: 0.4s; }
+        .p-card:hover { border-color: var(--accent); transform: translateY(-10px); }
+        .p-card.plus { background: var(--accent); color: white; border: none; }
+        .p-price { font-family: var(--font-display); font-size: 4rem; font-weight: 800; margin: 2rem 0; }
+        .p-list { list-style: none; text-align: left; margin: 3rem 0; color: var(--text-med); }
+        .plus .p-list { color: rgba(255,255,255,0.8); }
+        .p-list li { margin-bottom: 1.2rem; display: flex; gap: 12px; align-items: center; }
+        .btn-p { display: block; border-radius: 100px; padding: 1.2rem; background: white; color: black; text-decoration: none; font-weight: 800; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+        footer { padding: 5rem 5%; text-align: center; color: var(--text-med); border-top: 1px solid var(--border); }
+        @media (max-width: 1024px) { .p-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <nav>
-        <a href="./index.html" class="logo"><img src="./assets/logo.png"> SmokeLess Pro</a>
+        <a href="./index.html" class="logo">SmokeLess<span>.</span></a>
         <div class="nav-links">
             <a href="./index.html">Home</a>
-            <a href="./features.html">Features</a>
-            <a href="./science.html">Science</a>
-            <a href="./story.html">Our Story</a>
-            <a href="./pricing.html" class="active">Pricing</a>
+            <a href="./features.html">Dashboard</a>
+            <a href="./science.html">Clinical</a>
+            <a href="./story.html">Story</a>
+            <a href="./pricing.html" class="active">Plans</a>
         </div>
     </nav>
 
     <div class="container">
-        <h1 data-aos="fade-up">Invest in Your Life.</h1>
-        <div class="pricing-grid">
+        <h1 data-aos="fade-up">CAPITAL<br><span style="color: var(--accent);">PRESERVATION.</span></h1>
+        
+        <div class="p-grid">
             <div class="p-card" data-aos="fade-up" data-aos-delay="100">
-                <h3>Basic</h3>
+                <h3>Standard</h3>
                 <div class="p-price">Free</div>
                 <ul class="p-list">
-                    <li><i data-lucide="check" size="18"></i> Standard Tracking</li>
+                    <li><i data-lucide="check" size="18"></i> Basic Tracking</li>
                     <li><i data-lucide="check" size="18"></i> Ad-supported</li>
-                    <li><i data-lucide="check" size="18"></i> Basic Milestones</li>
+                    <li><i data-lucide="check" size="18"></i> Basic Health Data</li>
                 </ul>
-                <a href="#" class="btn-p">Get Started</a>
+                <a href="#" class="btn-p">Join Now</a>
             </div>
-            <div class="p-card featured" data-aos="fade-up">
+
+            <div class="p-card plus" data-aos="fade-up">
                 <h3>Elite Pro</h3>
-                <div class="p-price">$9.99<span style="font-size:1rem; color:var(--text-dim);">/mo</span></div>
+                <div class="p-price">$12<span style="font-size: 1rem; opacity: 0.7;">/mo</span></div>
                 <ul class="p-list">
-                    <li><i data-lucide="check" size="18"></i> All AI Behaviors</li>
-                    <li><i data-lucide="check" size="18"></i> Clinical Dashboard</li>
-                    <li><i data-lucide="check" size="18"></i> Premium Community</li>
-                    <li><i data-lucide="check" size="18"></i> No Ads Forever</li>
+                    <li><i data-lucide="zap" size="18"></i> Neural Tapering Engine</li>
+                    <li><i data-lucide="zap" size="18"></i> Clinical Dashboard</li>
+                    <li><i data-lucide="zap" size="18"></i> Zero Ad-Experience</li>
+                    <li><i data-lucide="zap" size="18"></i> Biological Metadata</li>
                 </ul>
-                <a href="#" class="btn-p">Start Free Trial</a>
+                <a href="#" class="btn-p" style="background: black; color: white;">Unlock Elite</a>
             </div>
+
             <div class="p-card" data-aos="fade-up" data-aos-delay="200">
-                <h3>Lifetime</h3>
-                <div class="p-price">$149</div>
+                <h3>Founder</h3>
+                <div class="p-price">$199</div>
                 <ul class="p-list">
-                    <li><i data-lucide="check" size="18"></i> One-time payment</li>
-                    <li><i data-lucide="check" size="18"></i> All future features</li>
-                    <li><i data-lucide="check" size="18"></i> Desktop access</li>
+                    <li><i data-lucide="check" size="18"></i> Lifetime Access</li>
+                    <li><i data-lucide="check" size="18"></i> Early Beta Access</li>
+                    <li><i data-lucide="check" size="18"></i> Private Support</li>
+                    <li><i data-lucide="check" size="18"></i> Founding Member Card</li>
                 </ul>
-                <a href="#" class="btn-p">Buy Once</a>
+                <a href="#" class="btn-p">Secure Slot</a>
             </div>
         </div>
     </div>
 
-    <footer>&copy; 2026 SmokeLess Pro. Best value for your lungs.</footer>
+    <footer>&copy; 2026 SmokeLess Pro. Designed for high-net-worth health.</footer>
     <script>lucide.createIcons(); AOS.init();</script>
 </body>
 </html>
